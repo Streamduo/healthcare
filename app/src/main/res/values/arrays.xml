@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="hot_service">
+        　　<item>餐饮服务</item>
+        　　<item>养生服务</item>
+        　　<item>家政服务</item>
+        　　<item>上门维修服务</item>
+    </string-array>
+    <string-array name="hot_goods">
+        　　<item>美容养生用品</item>
+        　　<item>生活百货</item>
+        　　<item>服装服饰</item>
+    </string-array>
+
+    <string-array name="js_type">
+        <item>积分支付</item>
+        <item>积分优先微信支付</item>
+        <item>积分优先支付宝支付</item>
+        <item>微信支付</item>
+        <item>支付宝支付</item>
+    </string-array>
+
+</resources>

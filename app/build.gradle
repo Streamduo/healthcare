@@ -1,0 +1,99 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.sxy.healthcare"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 6
+        versionName "1.1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+      /*  debug {
+            storeFile file("healthcareapp")
+            storePassword "123456789"
+            keyAlias "health"
+            keyPassword "123456789"
+        }*/
+        release {
+            storeFile file("healthcareapp")
+            storePassword "123456789"
+            keyAlias "health"
+            keyPassword "123456789"
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "String", "BASE_URL", "\"https://api.sxyapp.com/sapi/\""
+            buildConfigField "String", "SHARE_URL", "\"http://wx.sxyapp.com/wx/toShare.shtml?id=\""
+        }
+        release {
+            minifyEnabled true
+            buildConfigField "String", "BASE_URL", "\"https://api.sxyapp.com/sapi/\""
+            buildConfigField "String", "SHARE_URL", "\"http://wx.sxyapp.com/wx/toShare.shtml?id=\""
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.android.support:support-v4:27.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    implementation "com.android.support:design:27.1.0"
+
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    implementation 'com.youth.banner:banner:1.4.10'
+
+    implementation 'com.github.bumptech.glide:glide:4.6.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.jude:easyrecyclerview:4.4.2'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    implementation 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
+
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+
+
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+
+    implementation files('libs/alipaySdk-20180403.jar')
+    implementation files('libs/commons-codec-1.11.jar')
+
+    implementation files('libs/BaiduLBS_Android.jar')
+    implementation files('libs/IndoorscapeAlbumPlugin.jar')
+    implementation files('libs/httpmime-4.1.2.jar')
+    implementation files('libs/jsoup-1.11.3.jar')
+
+
+    implementation 'com.wuxiaolong.pullloadmorerecyclerview:library:1.1.2'
+
+    implementation 'com.tencent.bugly:crashreport:latest.release'
+
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
+    implementation 'pub.devrel:easypermissions:1.2.0'
+}

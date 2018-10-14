@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_000000"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    >
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_app"
+        android:orientation="vertical"
+        >
+        <include layout="@layout/layout_title_bar"/>
+
+        <EditText
+            android:id="@+id/et_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="8"
+            android:padding="@dimen/padding_8"
+            android:background="@drawable/bg_input"
+            android:layout_margin="@dimen/margin_10"
+            android:gravity="start"
+            />
+
+        <TextView
+            android:id="@+id/btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/comm_height_48"
+            android:background="@color/black_434343"
+            android:text="@string/submit"
+            android:textColor="@color/white_FFFFFF"
+            android:gravity="center"
+            android:layout_margin="@dimen/margin_24"
+            />
+    </LinearLayout>
+
+</LinearLayout>
+
+

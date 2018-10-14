@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white_FFFFFF"
+    >
+    <Button
+        android:id="@+id/btn_share_wx"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/comm_height_48"
+        android:text="分享到微信好友"
+        android:layout_marginLeft="@dimen/margin_16"
+        android:layout_marginRight="@dimen/margin_16"
+        />
+    <Button
+        android:id="@+id/btn_share_moment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/comm_height_48"
+        android:text="分享到微信朋友圈"
+        android:layout_marginLeft="@dimen/margin_16"
+        android:layout_marginRight="@dimen/margin_16"
+        />
+</LinearLayout>

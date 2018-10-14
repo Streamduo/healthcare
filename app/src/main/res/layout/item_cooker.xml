@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_10"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/tv_cooker_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 厨师1号"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_16"
+            android:visibility="gone"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            >
+            <TextView
+                android:id="@+id/tv_cooker_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="三星级"
+                />
+            <RatingBar
+                android:id="@+id/rb_cooker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:rating="3"
+                style="?android:attr/ratingBarStyleSmall"
+                />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="服务费：¥100"
+            />
+    </LinearLayout>
+    <CheckBox
+        android:id="@+id/item_cb_cooker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="@dimen/padding_4"
+        android:drawableLeft="@drawable/checkbox"
+        android:button="@null"
+        android:layout_marginRight="@dimen/margin_6"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        />
+</RelativeLayout>
+

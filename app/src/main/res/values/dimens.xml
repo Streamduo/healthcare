@@ -1,0 +1,149 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!-- 标题栏 -->
+    <dimen name="title_bar_height">42dp</dimen>
+    <!-- 顶部菜单栏 -->
+    <dimen name="top_menu_bar_height">45dp</dimen>
+
+    <!-- 底部菜单栏 -->
+    <dimen name="bottom_toolbar_height">48dp</dimen>
+
+    <dimen name="line_spacing_padding">6dp</dimen>
+
+    <!-- Margin -->
+    <dimen name="margin_0_5">.5dp</dimen>
+    <dimen name="margin_1">1dp</dimen>
+    <dimen name="margin_2">2dp</dimen>
+    <dimen name="margin_4">4dp</dimen>
+    <dimen name="margin_5">5dp</dimen>
+    <dimen name="margin_6">6dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
+    <dimen name="margin_12">12dp</dimen>
+    <dimen name="margin_15">15dp</dimen>
+    <dimen name="margin_16">16dp</dimen>
+    <dimen name="margin_18">18dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+    <dimen name="margin_24">24dp</dimen>
+    <dimen name="margin_32">32dp</dimen>
+    <dimen name="margin_40">40dp</dimen>
+    <dimen name="margin_48">48dp</dimen>
+    <dimen name="margin_56">56dp</dimen>
+    <dimen name="margin_66">66dp</dimen>
+    <dimen name="margin_70">70dp</dimen>
+    <dimen name="margin_80">80dp</dimen>
+    <dimen name="margin_100">100dp</dimen>
+    <dimen name="margin_120">120dp</dimen>
+    <dimen name="margin_130">130dp</dimen>
+    <dimen name="margin_140">140dp</dimen>
+    <dimen name="margin_160">160dp</dimen>
+    <dimen name="margin_200">200dp</dimen>
+    <!-- padding -->
+    <dimen name="padding_2">2dp</dimen>
+    <dimen name="padding_4">4dp</dimen>
+    <dimen name="padding_5">5dp</dimen>
+    <dimen name="padding_6">6dp</dimen>
+    <dimen name="padding_8">8dp</dimen>
+    <dimen name="padding_10">10dp</dimen>
+    <dimen name="padding_12">12dp</dimen>
+    <dimen name="padding_16">16dp</dimen>
+    <dimen name="padding_18">18dp</dimen>
+    <dimen name="padding_24">24dp</dimen>
+    <dimen name="padding_36">36dp</dimen>
+    <dimen name="padding_48">48dp</dimen>
+
+    <!--通用控件高度-->
+    <dimen name="comm_height_1">1dp</dimen>
+    <dimen name="comm_height_2">2dp</dimen>
+    <dimen name="comm_height_4">4dp</dimen>
+    <dimen name="comm_height_8">8dp</dimen>
+    <dimen name="comm_height_16">16dp</dimen>
+    <dimen name="comm_height_20">20dp</dimen>
+    <dimen name="comm_height_25">25dp</dimen>
+    <dimen name="comm_height_28">28dp</dimen>
+    <dimen name="comm_height_32">32dp</dimen>
+    <dimen name="comm_height_34">34dp</dimen>
+    <dimen name="comm_height_36">36dp</dimen>
+    <dimen name="comm_height_40">40dp</dimen>
+    <dimen name="comm_height_42">42dp</dimen>
+    <dimen name="comm_height_45">45dp</dimen>
+    <dimen name="comm_height_48">48dp</dimen>
+    <dimen name="comm_height_96">96dp</dimen>
+    <dimen name="comm_height_56">56dp</dimen>
+    <dimen name="comm_height_50">50dp</dimen>
+    <dimen name="comm_height_60">60dp</dimen>
+    <dimen name="comm_height_70">70dp</dimen>
+    <dimen name="comm_height_72">72dp</dimen>
+    <dimen name="comm_height_80">80dp</dimen>
+    <dimen name="comm_height_90">90dp</dimen>
+    <dimen name="comm_height_98">98dp</dimen>
+    <dimen name="comm_height_100">100dp</dimen>
+    <dimen name="comm_height_120">120dp</dimen>
+    <dimen name="comm_height_144">144dp</dimen>
+    <dimen name="comm_height_146">146dp</dimen>
+    <dimen name="comm_height_150">150dp</dimen>
+    <dimen name="comm_height_160">160dp</dimen>
+    <dimen name="comm_height_180">180dp</dimen>
+    <dimen name="comm_height_200">200dp</dimen>
+    <dimen name="comm_height_250">250dp</dimen>
+    <dimen name="comm_height_280">280dp</dimen>
+    <dimen name="comm_height_320">320dp</dimen>
+    <dimen name="comm_height_360">360dp</dimen>
+
+    <!--通用控件宽度-->
+    <dimen name="comm_width_8">8dp</dimen>
+    <dimen name="comm_width_16">16dp</dimen>
+    <dimen name="comm_width_20">20dp</dimen>
+    <dimen name="comm_width_25">25dp</dimen>
+    <dimen name="comm_width_28">28dp</dimen>
+    <dimen name="comm_width_32">32dp</dimen>
+    <dimen name="comm_width_36">36dp</dimen>
+    <dimen name="comm_width_40">40dp</dimen>
+    <dimen name="comm_width_42">42dp</dimen>
+    <dimen name="comm_width_48">48dp</dimen>
+    <dimen name="comm_width_56">56dp</dimen>
+    <dimen name="comm_width_60">60dp</dimen>
+    <dimen name="comm_width_70">70dp</dimen>
+    <dimen name="comm_width_80">80dp</dimen>
+    <dimen name="comm_width_96">96dp</dimen>
+    <dimen name="comm_width_100">100dp</dimen>
+    <dimen name="comm_width_110">110dp</dimen>
+    <dimen name="comm_width_120">120dp</dimen>
+    <dimen name="comm_width_160">160dp</dimen>
+    <dimen name="comm_width_180">180dp</dimen>
+    <dimen name="comm_width_230">230dp</dimen>
+
+
+    <!-- 常用字体大小 -->
+    <!-- micro -->
+    <dimen name="text_size_8">8sp</dimen>
+    <dimen name="text_size_10">10sp</dimen>
+    <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_13">13sp</dimen>
+    <!-- small -->
+    <dimen name="text_size_14">14sp</dimen>
+    <dimen name="text_size_15">15sp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
+    <dimen name="text_size_17">17sp</dimen>
+    <!-- medium -->
+    <dimen name="text_size_18">18sp</dimen>
+    <dimen name="text_size_19">19sp</dimen>
+    <dimen name="text_size_20">20sp</dimen>
+    <dimen name="text_size_21">21sp</dimen>
+    <dimen name="text_size_50">50sp</dimen>
+    <!-- large -->
+    <dimen name="text_size_22">22sp</dimen>
+    <dimen name="text_size_28">28sp</dimen>
+
+
+    <dimen name="snappingstepper_width_button">30dp</dimen>
+    <dimen name="snappingstepper_padding_button">10dp</dimen>
+    <dimen name="snappingstepper_textSize">15sp</dimen>
+
+
+
+</resources>

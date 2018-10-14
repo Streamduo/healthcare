@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!-- 常用颜色 -->
+    <color name="transparent">#00000000</color>
+    <color name="transparent_gray">#6F666666</color>
+    <color name="yellow">#FFCA00</color>
+
+    <color name="white_FFFFFF">#FFFFFF</color>
+    <color name="white_55FFFFFF">#55FFFFFF</color>
+    <color name="white_F4F4F4">#F4F4F4</color>
+    <color name="white_F0F0F0">#F0F0F0</color>
+
+    <color name="black_000000">#000000</color>
+    <color name="black_434343">#434343</color>
+    <color name="black_696969">#696969</color>
+
+    <color name="red_FF0000">#FF0000</color>
+    <color name="red_944D4A">#944D4A</color>
+    <color name="red_d71d09">#d71d09</color>
+    <color name="red_C78479">#C78479</color>
+    <color name="red_CB4D38">#cb4d38</color>
+    <color name="red_C34A53">#C34A53</color>
+    <color name="red_E55239">#E55239</color>
+    <color name="red_E51C23">#E51C23</color>
+    <color name="red_980000">#980000</color>
+    <color name="red_870001">#870001</color>
+    <color name="red_A73C2A">#A73C2A</color>
+    <color name="red_431B11">#431B11</color>
+    <color name="red_8E1316">#8E1316</color>
+    <color name="red_main">#CA1520</color>
+
+    <color name="green_00FF00">#00FF00</color>
+    <color name="green_04BE02">#04BE02</color>
+    <color name="green_72BA4E">#72BA4E</color>
+    <color name="blue_0000FF">#0000FF</color>
+    <color name="blue_0080FF">#0080FF</color>
+
+    <color name="yellow_FFD600">#FFD600</color>
+    <color name="yellow_FF6507">#FF6507</color>
+    <color name="gray_FFFFFF">#FFFFFF</color>
+    <color name="gray_EDEDED">#EDEDED</color>
+    <color name="gray_E7E7E7">#E7E7E7</color>
+    <color name="gray_BBBBBB">#BBBBBB</color>
+    <color name="gray_B7B7B7">#B7B7B7</color>
+    <color name="gray_B2B2B2">#B2B2B2</color>
+    <color name="gray_EBEBEB">#EBEBEB</color>
+    <color name="gray_979797">#979797</color>
+    <color name="gray_C3C3C3">#C3C3C3</color>
+    <color name="gray_F0F0F2">#F0F0F2</color>
+    <color name="gray_F8F8F8">#F8F8F8</color>
+    <color name="gray_AAAAAA">#AAAAAA</color>
+    <color name="gray_AAAAAAAA">#33AAAAAA</color>
+    <color name="gray_background">#F7F7F7</color>
+
+    <color name="cl_snappingstepper_button_normal">#237bb6</color>
+    <color name="cl_snappingstepper_button_press">#1f567b</color>
+    <color name="cl_snappingstepper_text_bg">#2b8ccd</color>
+    <color name="cl_snappingstepper_text">#000000</color>
+
+
+    <color name="background">#FFFFFF</color>
+    <color name="split_line">#11112233</color>
+    <color name="text1">#59B29C</color>
+    <color name="text2">#333333</color>
+
+    <color name="color1">#F0F0F0</color>
+    <color name="color2">#FFFFFF</color>
+    <color name="color3">#B0B0B0</color>
+    <color name="color4">#666666</color>
+    <color name="color5">#57C5E8</color>
+</resources>

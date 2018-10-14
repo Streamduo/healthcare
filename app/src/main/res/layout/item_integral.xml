@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/comm_height_48">
+   <TextView
+       android:id="@+id/item_tv_integral"
+       android:layout_width="wrap_content"
+       android:layout_height="match_parent"
+       android:text="xxxx"
+       android:gravity="center"
+       android:layout_marginLeft="@dimen/margin_10"
+       />
+    <CheckBox
+        android:id="@+id/item_cb_integral"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="@dimen/padding_8"
+        android:drawableLeft="@drawable/checkbox"
+        android:button="@null"
+        android:layout_marginRight="@dimen/margin_10"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_divider_line"
+        android:scaleType="fitXY"
+        android:layout_alignParentBottom="true"
+        />
+</RelativeLayout>

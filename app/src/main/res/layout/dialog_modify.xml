@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white_FFFFFF"
+    android:layout_margin="@dimen/margin_10"
+    >
+
+
+    <TextView
+        android:id="@+id/btn_modify_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/comm_height_48"
+        android:text="修改头像"
+        android:layout_marginLeft="@dimen/margin_16"
+        android:layout_marginRight="@dimen/margin_16"
+        android:gravity="center"
+        android:textColor="@color/blue_0080FF"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white_F4F4F4"
+        />
+    <TextView
+        android:id="@+id/btn_modify_info"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/comm_height_48"
+        android:text="修改昵称"
+        android:layout_marginLeft="@dimen/margin_16"
+        android:layout_marginRight="@dimen/margin_16"
+        android:gravity="center"
+        android:textColor="@color/blue_0080FF"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/white_F4F4F4"
+        />
+    <TextView
+        android:id="@+id/btn_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/comm_height_48"
+        android:text="取消"
+        android:layout_marginLeft="@dimen/margin_16"
+        android:layout_marginRight="@dimen/margin_16"
+        android:gravity="center"
+        android:textColor="@color/blue_0080FF"
+        />
+</LinearLayout>

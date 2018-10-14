@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/black_000000"
+    android:fitsSystemWindows="true"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/bg_app"
+        >
+        <include layout="@layout/layout_title_bar"
+            android:id="@+id/title_bar"
+            />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rc_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_bar"
+            android:layout_marginRight="@dimen/margin_16"
+            android:layout_marginBottom="@dimen/comm_height_72"
+            android:scrollbars="none"
+            />
+        <TextView
+            android:id="@+id/confirm_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/comm_height_48"
+            android:background="@color/black_434343"
+            android:text="确认"
+            android:textColor="@color/white_FFFFFF"
+            android:gravity="center"
+            android:layout_margin="@dimen/margin_24"
+            android:layout_alignParentBottom="true"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

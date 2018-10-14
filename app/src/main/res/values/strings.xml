@@ -1,0 +1,78 @@
+<resources>
+    <string name="app_name">圣香园</string>
+    <string name="snack_message_main_gather">开始采集</string>
+    <string name="snack_message_login_success">登录成功</string>
+    <string name="snack_message_not_notify">没有新数据</string>
+    <string name="snack_message_net_error">网络错误 请检查网络</string>
+    <string name="snack_message_timeout_error">连接超时 请检查网络</string>
+    <string name="snack_message_password_error">密码错误</string>
+    <string name="snack_message_unknown_error">未知错误</string>
+    <string name="snack_message_data_error">数据解析错误</string>
+    <string name="snack_action_to_setting">设置</string>
+
+    <string name="tab_home">首页</string>
+    <string name="tab_shopping_cart">购物车</string>
+    <string name="tab_me">我的</string>
+
+    <string name="search_hint">搜索你想要的</string>
+    <string name="search_tv">搜索</string>
+
+    <string name="category_food">餐饮</string>
+    <string name="category_health">养生</string>
+    <string name="category_goods">商品</string>
+    <string name="category_fun">娱乐</string>
+    <string name="category_other">其他</string>
+
+    <string name="hot_service">热门服务</string>
+    <string name="hot_goods">热门商品</string>
+
+    <string name="place_order">下单</string>
+    <string name="all_select">全选</string>
+
+    <string name="comm_del">删除</string>
+    <string name="share_courtesy">分享有礼</string>
+    <string name="order_settlement">订单结算</string>
+
+    <string name="profile_integral">我的积分</string>
+    <string name="integral_recharge">积分充值</string>
+    <string name="profile_order">我的订单</string>
+    <string name="profile_reserve">我的预定</string>
+    <string name="profile_invited_members">我邀请的会员</string>
+    <string name="profile_modify_info">修改资料</string>
+    <string name="profile_modify_pwd">修改密码</string>
+    <string name="profile_deal_history">交易记录</string>
+    <string name="customer_service">客服电话</string>
+    <string name="profile_exit">退出登录</string>
+    <string name="phone_number">手机号：</string>
+    <string name="password">密&#160;&#160;&#160;&#160;码：</string>
+    <string name="verification_code">验证码：</string>
+    <string name="register">注册</string>
+    <string name="submit">提交</string>
+    <string name="forget_pwd">不记得密码了？</string>
+    <string name="find_pwd">找回密码</string>
+    <string name="new_pwd">新密码：</string>
+    <string name="confirm_pwd">确认密码：</string>
+    <string name="obtain_vc">获取\n验证码</string>
+    <string name="phone_number_empty">请输入手机号！</string>
+
+    <string name="comm_detail">详情</string>
+    <string name="order_detail">订单详情</string>
+
+    <string name="business">商家</string>
+
+    <string name="errcode_success">发送成功</string>
+    <string name="errcode_cancel">发送取消</string>
+    <string name="errcode_deny">发送被拒绝</string>
+    <string name="errcode_unsupported">不支持错误</string>
+    <string name="errcode_unknown">发送返回</string>
+
+    <string name="cancle">取消</string>
+    <string name="title">请选择时间</string>
+    <string name="commit">确定</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+    <string name="hour">时</string>
+    <string name="minute">分</string>
+    <string name="recharge_desc">"。。"</string>
+</resources>
