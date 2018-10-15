@@ -360,7 +360,7 @@ public class OrderDetailActivity extends BaseActivity{
                                      }else    if(response.getData().getOrderStatus()==5){
                                          status.setText("订单完成");
                                          comment.setVisibility(View.VISIBLE);
-                                         comment.setText("已付款");
+                                         comment.setText("已完成");
                                          pay.setVisibility(View.GONE);
                                          pay.setClickable(false);
                                      }

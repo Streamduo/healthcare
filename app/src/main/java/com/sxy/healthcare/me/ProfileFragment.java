@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -655,8 +657,13 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
                                     balance.setText(response.getData().getBalance() + "");
                                     sharedPrefsUtil.setString(Constants.USER_INFO, response.getData().getUserId());
                                     sharedPrefsUtil.setString(Constants.USER_INFO_BALANCE, response.getData().getBalance() + "");
+                                    RequestOptions options = new RequestOptions()
+                                            .placeholder(R.drawable.default_head)// 正在加载中的图片
+                                            .error(R.drawable.default_head) // 加载失败的图片
+                                            .diskCacheStrategy(DiskCacheStrategy.ALL); // 磁盘缓存策略
+
                                     Glide.with(getContext())
-                                            .load(response.getData().getHeadImg()).apply(GlideUtils.getOptionsAvatar()).into(avatar);
+                                            .load(response.getData().getHeadImg()).apply(options).into(avatar);
                                 }
                             } else {
                                 ToastUtils.shortToast(getActivity().getApplicationContext(), response.getMsg());
