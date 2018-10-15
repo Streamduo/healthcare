@@ -512,7 +512,7 @@ public class OrderDetailActivity extends BaseActivity{
                                     Toast.makeText(OrderDetailActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
                                 }*/
 
-                                pay.setText("取消订单");
+                                pay.setText("已支付");
                                 status.setText("已支付");
                                 PayEvent payEvent = new PayEvent();
                                 payEvent.setPrice(orderBean.getRealPrice());

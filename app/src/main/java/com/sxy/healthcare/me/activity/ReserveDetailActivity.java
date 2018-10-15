@@ -287,7 +287,8 @@ public class ReserveDetailActivity extends BaseActivity {
                                         pay.setClickable(false);
                                     }else    if(response.getData().getSummaryVo().getState()==5){
                                         status.setText("订单完成");
-                                        pay.setVisibility(View.GONE);
+                                        pay.setVisibility(View.VISIBLE);
+                                        pay.setText("已完成");
                                         pay.setClickable(false);
                                     }
 

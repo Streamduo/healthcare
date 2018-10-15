@@ -6,13 +6,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -27,10 +23,7 @@ import com.sxy.healthcare.common.utils.LogUtils;
 import com.sxy.healthcare.common.utils.NetUtils;
 import com.sxy.healthcare.common.utils.ThreeDesUtils;
 import com.sxy.healthcare.common.utils.ToastUtils;
-import com.sxy.healthcare.home.bean.BusinessBean;
-import com.sxy.healthcare.home.bean.TraderBean;
 import com.sxy.healthcare.me.activity.OrderDetailActivity;
-import com.sxy.healthcare.me.activity.ProfileOrderActivity;
 import com.sxy.healthcare.me.activity.ReserveDetailActivity;
 import com.sxy.healthcare.me.adapter.OrderAdapter;
 import com.sxy.healthcare.me.bean.BookingBean;
@@ -58,12 +51,11 @@ import okhttp3.RequestBody;
 
 import static com.sxy.healthcare.me.adapter.OrderAdapter.SDK_PAY_FLAG;
 
-public class OrderFragment extends BaseFragment implements  RecyclerArrayAdapter.OnLoadMoreListener,
+public class OrderFragment extends BaseFragment implements RecyclerArrayAdapter.OnLoadMoreListener,
         SwipeRefreshLayout.OnRefreshListener,
         RecyclerArrayAdapter.OnNoMoreListener {
 
-    private static final String TAG= OrderFragment.class.getSimpleName();
-
+    private static final String TAG = OrderFragment.class.getSimpleName();
 
     @BindView(R.id.rc_order)
     EasyRecyclerView rcOrder;
@@ -74,9 +66,9 @@ public class OrderFragment extends BaseFragment implements  RecyclerArrayAdapter
 
     private Disposable orderDis;
 
-    private int pageSize=20;
+    private int pageSize = 20;
 
-    private int pageNo=1;
+    private int pageNo = 1;
 
     private int total = 0;
 
@@ -125,9 +117,6 @@ public class OrderFragment extends BaseFragment implements  RecyclerArrayAdapter
 
     };
 
-
-
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,35 +125,39 @@ public class OrderFragment extends BaseFragment implements  RecyclerArrayAdapter
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
     protected void initViews() {
         super.initViews();
-        orderAdapter = new OrderAdapter(getActivity(),getActivity().getSupportFragmentManager(),mHandler);
+        orderAdapter = new OrderAdapter(getActivity(), getActivity().getSupportFragmentManager(), mHandler);
         rcOrder.setAdapter(orderAdapter);
-        rcOrder.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL, false));
-
+        rcOrder.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
 
         orderAdapter.setMore(R.layout.view_more, this);
         orderAdapter.setNoMore(R.layout.view_no_more, this);
         rcOrder.setRefreshListener(this);
         orderAdapter.pauseMore();
 
-       // final Intent intent = new Intent(getActivity(),OrderDetailActivity.class);
+        // final Intent intent = new Intent(getActivity(),OrderDetailActivity.class);
 
         orderAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                if(null!=orderBeans){
+                if (null != orderBeans) {
                    /* intent.putExtra(Constants.EXTRA_ORDER,orderBeans.get(position));
                     startActivity(intent);*/
                     Intent intent;
-                    if("2".equals(orderBeans.get(position).getOrderType())){
-                        intent = new Intent(getContext(),ReserveDetailActivity.class);
+                    if ("2".equals(orderBeans.get(position).getOrderType())) {
+                        intent = new Intent(getContext(), ReserveDetailActivity.class);
                         BookingBean bookingBean = new BookingBean();
                         bookingBean.setBookNo(orderBeans.get(position).getOrderId());
-                        intent.putExtra("reserveBean",bookingBean);
-                    }else {
-                        intent = new Intent(getContext(),OrderDetailActivity.class);
-                        intent.putExtra(Constants.EXTRA_ORDER,orderBeans.get(position));
+                        intent.putExtra("reserveBean", bookingBean);
+                    } else {
+                        intent = new Intent(getContext(), OrderDetailActivity.class);
+                        intent.putExtra(Constants.EXTRA_ORDER, orderBeans.get(position));
                     }
                     startActivity(intent);
                 }
@@ -177,38 +170,32 @@ public class OrderFragment extends BaseFragment implements  RecyclerArrayAdapter
     protected void initDatas() {
         super.initDatas();
 
-        orderType =getArguments().getInt("orderType");
+        orderType = getArguments().getInt("orderType");
 
         getOrders(orderType);
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
     /**
      * 我的订单
-     * */
-    private void getOrders(int type){
+     */
+    private void getOrders(int type) {
 
-        if(!NetUtils.isNetworkAvailable(getActivity().getApplicationContext())){
-            ToastUtils.shortToast(getActivity().getApplicationContext(),"当前网络不可用～");
+        if (!NetUtils.isNetworkAvailable(getActivity().getApplicationContext())) {
+            ToastUtils.shortToast(getActivity().getApplicationContext(), "当前网络不可用～");
             return;
         }
 
         final JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("pageSize",pageSize);
+        jsonObject.addProperty("pageSize", pageSize);
         jsonObject.addProperty("pageNo", pageNo);
         jsonObject.addProperty("statusType", type);
 
-
-        LogUtils.d(TAG,"jsonObject="+jsonObject.toString());
+        LogUtils.d(TAG, "jsonObject=" + jsonObject.toString());
 
         String param = null;
         try {
             param = ThreeDesUtils.encryptThreeDESECB(jsonObject.toString(),
-                    sharedPrefsUtil.getString(Constants.USER_SECRET_KEY,""));
+                    sharedPrefsUtil.getString(Constants.USER_SECRET_KEY, ""));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -217,77 +204,85 @@ public class OrderFragment extends BaseFragment implements  RecyclerArrayAdapter
 
         JSONObject jsonObject1 = new JSONObject();
         try {
-            jsonObject1.put("token",sharedPrefsUtil.getString(Constants.USER_TOKEN,""));
-            jsonObject1.put("param",param);
+            jsonObject1.put("token", sharedPrefsUtil.getString(Constants.USER_TOKEN, ""));
+            jsonObject1.put("param", param);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-
-        RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),
                 jsonObject1.toString());
 
         ApiServiceFactory.getStringApiService()
-                .getOrders(body)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<String>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        orderDis = d;
-                    }
+                         .getOrders(body)
+                         .subscribeOn(Schedulers.io())
+                         .observeOn(AndroidSchedulers.mainThread())
+                         .subscribe(new Observer<String>() {
+                             @Override
+                             public void onSubscribe(Disposable d) {
+                                 orderDis = d;
+                             }
 
-                    @Override
-                    public void onNext(String stringResponse) {
-                        try {
-                            String result= ThreeDesUtils.decryptThreeDESECB(stringResponse.toString(),
-                                    sharedPrefsUtil.getString(Constants.USER_SECRET_KEY,""));
+                             @Override
+                             public void onNext(String stringResponse) {
+                                 try {
+                                     String result = ThreeDesUtils.decryptThreeDESECB(stringResponse.toString(),
+                                             sharedPrefsUtil.getString(Constants.USER_SECRET_KEY, ""));
 
-                            LogUtils.d(TAG,"result="+result);
+                                     LogUtils.d(TAG, "result=" + result);
 
-                            Gson gson = new Gson();
-                            OrderResponse response = gson.fromJson(result,OrderResponse.class);
+                                     Gson gson = new Gson();
+                                     OrderResponse response = gson.fromJson(result, OrderResponse.class);
 
-                            if(response.isSuccess()){
-                                if(null!=response.getData().getOrdersMainVos()){
+                                     if (response.isSuccess()) {
+                                         if (null != response.getData().getOrdersMainVos() && response.getData()
+                                                                                                      .getOrdersMainVos()
+                                                                                                      .size() > 0) {
 
-                                    if(pageNo==1){
-                                        orderBeans.clear();
-                                        orderBeans.addAll(response.getData().getOrdersMainVos());
-                                    }else {
-                                        orderBeans.addAll(response.getData().getOrdersMainVos());
-                                    }
-                                    orderAdapter.clear();
-                                    orderAdapter.addAll(orderBeans);
-                                    LogUtils.d(TAG,"size="+orderAdapter.getAllData().size()+",orderbean.size="+orderBeans.size());
-                                    pageNo = pageNo+1;
-                                }
-                                total = response.getData().getCount();
-                            }else {
-                                ToastUtils.shortToast(getActivity().getApplicationContext(),response.getMsg());
-                            }
+                                             if (pageNo == 1) {
+                                                 orderBeans.clear();
+                                                 orderBeans.addAll(response.getData().getOrdersMainVos());
+                                             } else {
+                                                 orderBeans.addAll(response.getData().getOrdersMainVos());
+                                             }
+                                             orderAdapter.clear();
+                                             orderAdapter.addAll(orderBeans);
+                                             LogUtils.d(TAG, "size=" + orderAdapter.getAllData()
+                                                                                   .size() + ",orderbean.size=" + orderBeans
+                                                     .size());
+                                             pageNo = pageNo + 1;
+                                         } else {
+                                             if (pageNo == 1) {
+                                                 orderBeans.clear();
+                                                 orderAdapter.clear();
+                                             }
+                                         }
+                                         total = response.getData().getCount();
+                                     } else {
+                                         ToastUtils.shortToast(getActivity().getApplicationContext(), response.getMsg());
+                                     }
 
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
+                                 } catch (Exception e) {
+                                     e.printStackTrace();
+                                 }
+                             }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                        ToastUtils.shortToast(getContext().getApplicationContext(),"获取失败～");
-                    }
+                             @Override
+                             public void onError(Throwable e) {
+                                 e.printStackTrace();
+                                 ToastUtils.shortToast(getContext().getApplicationContext(), "获取失败～");
+                             }
 
-                    @Override
-                    public void onComplete() {
+                             @Override
+                             public void onComplete() {
 
-                    }
-                });
+                             }
+                         });
 
     }
 
-    private void destroyDis(){
-        if (null!=orderDis&&!orderDis.isDisposed()){
+    private void destroyDis() {
+        if (null != orderDis && !orderDis.isDisposed()) {
             orderDis.dispose();
         }
     }
@@ -319,9 +314,9 @@ public class OrderFragment extends BaseFragment implements  RecyclerArrayAdapter
 
     @Override
     public void onLoadMore() {
-        LogUtils.d(TAG,"[onLoadMore] pageNo="+pageNo);
+        LogUtils.d(TAG, "[onLoadMore] pageNo=" + pageNo);
         // if(isMore){
-        if(orderAdapter.getCount()<total){
+        if (orderAdapter.getCount() < total) {
             getOrders(orderType);
         }
 
