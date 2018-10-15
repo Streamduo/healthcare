@@ -130,7 +130,7 @@ public class OrderAdapter extends RecyclerArrayAdapter<OrderBean> {
             if(data.getOrderStatus().equals("0")){
                 btnJs.setVisibility(View.VISIBLE);
                 btnCancel.setVisibility(View.VISIBLE);
-                btnCancel.setText("删除订单");
+                btnCancel.setText("取消订单");
                 canceled.setVisibility(View.GONE);
                 btnJs.setText("去支付");
             }else if(data.getOrderStatus().equals("1")){

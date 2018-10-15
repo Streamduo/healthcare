@@ -285,7 +285,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
                 orderSettleDialog.show(getFragmentManager(), TAG);
                 orderSettleDialog.setConfirmListener(new OrderSettleDialog.ConfirmListener() {
                     @Override
-                    public void OnSelctedClick(int position, String price) {
+                    public void OnSelctedClick(int position, int price) {
                         Log.i("ssssss", position + "====" + price);
                         createOrder(position, price);
                     }
@@ -306,7 +306,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         }
     }
 
-    private void createOrder(int position, String price) {
+    private void createOrder(int position, int price) {
         selectPayType = position;
         if (!NetUtils.isNetworkAvailable(getActivity().getApplicationContext())) {
             ToastUtils.shortToast(getActivity().getApplicationContext(), "当前网络不可用～");
@@ -427,6 +427,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
                         if (orderSettleDialog!=null){
                             orderSettleDialog.dismiss();
                         }
+
                         try {
                             String result = ThreeDesUtils.decryptThreeDESECB(stringResponse.toString(),
                                     sharedPrefsUtil.getString(Constants.USER_SECRET_KEY, ""));

@@ -1,10 +1,12 @@
 package com.sxy.healthcare.me.dialog;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -70,12 +72,15 @@ public class OrderSettleDialog extends DialogFragment {
         btnJS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                int i = Integer.parseInt(getPay());
-//                if (i>0){
-                    confirmListener.OnSelctedClick(selectpos, getPay());
-//                }else {
-//                    ToastUtils.shortToast(getContext(),"消费金额不能为零");
-//                }
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                //隐藏软键盘
+                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+                int i = Integer.parseInt(getPay());
+                if (i>0){
+                    confirmListener.OnSelctedClick(selectpos, i);
+                }else {
+                    ToastUtils.shortToast(getContext(),"消费金额不能为零");
+                }
 
             }
         });
@@ -108,7 +113,7 @@ public class OrderSettleDialog extends DialogFragment {
     }
 
     public interface ConfirmListener {
-        void OnSelctedClick(int position, String price);
+        void OnSelctedClick(int position, int price);
     }
 
     public ArrayAdapter getAdapter() {

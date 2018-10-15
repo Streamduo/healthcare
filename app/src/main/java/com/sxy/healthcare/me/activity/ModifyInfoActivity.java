@@ -1,9 +1,7 @@
 package com.sxy.healthcare.me.activity;
 
-import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -11,22 +9,19 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import com.sxy.healthcare.MainActivity;
 import com.sxy.healthcare.R;
 import com.sxy.healthcare.base.BaseActivity;
 import com.sxy.healthcare.base.Constants;
@@ -43,10 +38,7 @@ import com.sxy.healthcare.common.utils.NetUtils;
 import com.sxy.healthcare.common.utils.StringUtils;
 import com.sxy.healthcare.common.utils.ThreeDesUtils;
 import com.sxy.healthcare.common.utils.ToastUtils;
-import com.sxy.healthcare.common.utils.UriToFileUtils;
 import com.sxy.healthcare.common.utils.Util;
-import com.sxy.healthcare.common.utils.ValidatorUtils;
-import com.sxy.healthcare.common.view.CommonDialog;
 import com.sxy.healthcare.common.view.NicknameDialog;
 import com.sxy.healthcare.me.bean.UserInfo;
 import com.sxy.healthcare.me.dialog.DatePickerFragment;
@@ -67,15 +59,11 @@ import butterknife.BindView;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class ModifyInfoActivity extends BaseActivity implements View.OnClickListener,EasyPermissions.PermissionCallbacks {
@@ -185,8 +173,12 @@ public class ModifyInfoActivity extends BaseActivity implements View.OnClickList
                 tvNo.setText(userInfo.getCardNo());
                 tvBalance.setText(userInfo.getBalance()+"");
                 tvYc.setText(userInfo.getFirstRecharge());
+                RequestOptions options = new RequestOptions()
+                        .placeholder(R.drawable.default_head)// 正在加载中的图片
+                        .error(R.drawable.default_head) // 加载失败的图片
+                        .diskCacheStrategy(DiskCacheStrategy.ALL); // 磁盘缓存策略
                 Glide.with(ModifyInfoActivity.this)
-                        .load(userInfo.getHeadImg()).apply(GlideUtils.getOptionsAvatar()).into(avatar);
+                        .load(userInfo.getHeadImg()).apply(options).into(avatar);
 
                 tvBirth.setText(userInfo.getBirthday());
 
