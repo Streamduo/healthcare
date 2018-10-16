@@ -334,10 +334,10 @@ public class OrderDetailActivity extends BaseActivity{
                                          comment.setVisibility(View.GONE);
                                          pay.setVisibility(View.VISIBLE);
                                      }else    if(response.getData().getOrderStatus()==1){
-                                         status.setText("已完成");
+                                         status.setText("已付款");
                                          comment.setVisibility(View.GONE);
                                          pay.setVisibility(View.VISIBLE);
-                                         pay.setText("已完成");
+                                         pay.setText("已付款");
                                          pay.setClickable(false);
                                      }else    if(response.getData().getOrderStatus()==2){
                                          status.setText("商家已接单");
