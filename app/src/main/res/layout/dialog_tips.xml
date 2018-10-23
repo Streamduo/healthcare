@@ -17,7 +17,7 @@
             android:textSize="@dimen/text_size_16"
             android:gravity="center_horizontal"
             android:layout_gravity="center_horizontal"
-            android:text="商家接单15分钟内（含15分钟）取消订单，不收取手续费；在预约就餐时间2小时以上的按付款额10%计，不足2小时的按付款额20%计。"
+            android:text="商家接单后，在预约时间2小时以上取消订单不收取手续费，不足2小时取消订单的按预约付款额的20%计"
             android:layout_margin="@dimen/margin_16"
             />
     </LinearLayout>

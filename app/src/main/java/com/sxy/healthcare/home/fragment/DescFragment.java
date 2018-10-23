@@ -1,15 +1,10 @@
 package com.sxy.healthcare.home.fragment;
 
 import android.content.Intent;
-import android.icu.util.RangeValueIterator;
 import android.os.Bundle;
-import android.provider.DocumentsContract;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -78,7 +73,7 @@ public class DescFragment extends BaseFragment {
             webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);*/
 
              if(businessBean!=null&&businessBean.getTraderDetail()!=null&&businessBean.getTraderDetail().getContext()!=null){
-                 webView.loadData(getNewContent(businessBean.getTraderDetail().getContext()),"text/html","utf-8");
+                 webView.loadDataWithBaseURL(null,getNewContent(businessBean.getTraderDetail().getContext()),"text/html","utf-8",null);
              }
 
 
