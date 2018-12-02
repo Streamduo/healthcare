@@ -44,10 +44,12 @@ import com.sxy.healthcare.common.utils.ShareUtils;
 import com.sxy.healthcare.common.utils.SharedPrefsUtil;
 import com.sxy.healthcare.common.utils.ThreeDesUtils;
 import com.sxy.healthcare.common.utils.ToastUtils;
+import com.sxy.healthcare.home.activity.FoodMenuActivity;
 import com.sxy.healthcare.me.activity.BillActivity;
 import com.sxy.healthcare.me.activity.DealHistoryActivity;
 import com.sxy.healthcare.me.activity.IntegralRechargeActivity;
 import com.sxy.healthcare.me.activity.InvitedMemberActivity;
+import com.sxy.healthcare.me.activity.LoginActivity;
 import com.sxy.healthcare.me.activity.ModifyInfoActivity;
 import com.sxy.healthcare.me.activity.MyOrderActivity;
 import com.sxy.healthcare.me.activity.ProfileReserveActivity;
@@ -59,6 +61,7 @@ import com.sxy.healthcare.me.bean.WxPayBean;
 import com.sxy.healthcare.me.dialog.OrderSettleDialog;
 import com.sxy.healthcare.me.dialog.ShareDialog;
 import com.sxy.healthcare.me.event.CancelEvent;
+import com.sxy.healthcare.me.event.LoginOutEvent;
 import com.sxy.healthcare.me.event.PayEvent;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 
@@ -424,7 +427,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
                     @Override
                     public void onNext(String stringResponse) {
-                        if (orderSettleDialog!=null){
+                        if (orderSettleDialog != null) {
                             orderSettleDialog.dismiss();
                         }
 
@@ -450,7 +453,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
                                     if (data == true) {
                                         getUserProfile();
                                         ToastUtils.LongToast(getActivity(), "支付成功");
-                                    }else {
+                                    } else {
                                         ToastUtils.LongToast(getActivity(), "支付失败");
                                     }
                                 }
@@ -779,6 +782,14 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void onRefresh() {
         getUserProfile();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void Event(LoginOutEvent loginOutEvent) {
+        sharedPrefsUtil.removeByKey(Constants.USER_INFO);
+        sharedPrefsUtil.removeByKey(Constants.LOGIN_SUCCESS);
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        startActivity(intent);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

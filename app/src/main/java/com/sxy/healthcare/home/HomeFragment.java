@@ -25,12 +25,16 @@ import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.sxy.healthcare.R;
+import com.sxy.healthcare.base.AppConfig;
 import com.sxy.healthcare.base.BaseFragment;
 import com.sxy.healthcare.base.Constants;
 import com.sxy.healthcare.base.HealthcaseApplication;
+import com.sxy.healthcare.base.bean.BaseInfo;
 import com.sxy.healthcare.common.net.ApiServiceFactory;
+import com.sxy.healthcare.common.net.Response;
 import com.sxy.healthcare.common.utils.GlideUtils;
 import com.sxy.healthcare.common.utils.LogUtils;
 import com.sxy.healthcare.common.utils.NetUtils;
@@ -45,13 +49,18 @@ import com.sxy.healthcare.home.adapter.SearchGoodsAdapter;
 import com.sxy.healthcare.home.bean.AdsVosBean;
 import com.sxy.healthcare.home.bean.HomeInfo;
 import com.sxy.healthcare.home.bean.VersionInfo;
+import com.sxy.healthcare.me.event.GetTokenEvent;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,11 +105,19 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener,
     private int progress; //下载进度
     private boolean cancelFlag = false; //取消下载标志位
     private int con = 0;
+    private Disposable disposable;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_home);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -255,58 +272,58 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener,
                     .create(okhttp3.MediaType.parse("application/json; charset=utf-8"), jsonObject.toString());
 
             ApiServiceFactory.getStringApiService()
-                             .getVersion(body)
-                             .subscribeOn(Schedulers.io())
-                             .observeOn(AndroidSchedulers.mainThread())
-                             .subscribe(new Observer<String>() {
-                                 @Override
-                                 public void onSubscribe(Disposable d) {
-                                     homeDis = d;
-                                 }
+                    .getVersion(body)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<String>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+                            homeDis = d;
+                        }
 
-                                 @Override
-                                 public void onNext(String stringResponse) {
-                                     try {
-                                         if (stringResponse != null) {
-                                             String result = ThreeDesUtils.decryptThreeDESECB(stringResponse.toString(),
-                                                     sharedPrefsUtil.getString(Constants.USER_SECRET_KEY, ""));
+                        @Override
+                        public void onNext(String stringResponse) {
+                            try {
+                                if (stringResponse != null) {
+                                    String result = ThreeDesUtils.decryptThreeDESECB(stringResponse.toString(),
+                                            sharedPrefsUtil.getString(Constants.USER_SECRET_KEY, ""));
 
-                                             LogUtils.d(TAG, "result=" + result.toString());
+                                    LogUtils.d(TAG, "result=" + result.toString());
 
-                                             Gson gson = new Gson();
-                                             VersionInfo response = gson.fromJson(result, VersionInfo.class);
+                                    Gson gson = new Gson();
+                                    VersionInfo response = gson.fromJson(result, VersionInfo.class);
 
-                                             if (response.isSuccess()) {
-                                                 String sysversion = response.getData().versionNo;
-                                                 String s = sysversion.replace(".", "");
-                                                 int sysversioncode = Integer.parseInt(s);
-                                                 String versionName = getCurrentVersionName(getActivity());
-                                                 String s1 = versionName.replace(".", "");
-                                                 int versioncode = Integer.parseInt(s1);
-                                                 if (sysversioncode > versioncode) {
-                                                     showDialog(response.getData().updateDesc, response.getData().updateUrl);
-                                                 }
+                                    if (response.isSuccess()) {
+                                        String sysversion = response.getData().versionNo;
+                                        String s = sysversion.replace(".", "");
+                                        int sysversioncode = Integer.parseInt(s);
+                                        String versionName = getCurrentVersionName(getActivity());
+                                        String s1 = versionName.replace(".", "");
+                                        int versioncode = Integer.parseInt(s1);
+                                        if (sysversioncode > versioncode) {
+                                            showDialog(response.getData().updateDesc, response.getData().updateUrl);
+                                        }
 
-                                             } else {
-                                                 ToastUtils.shortToast(HealthcaseApplication.getApplication(), "");
-                                             }
-                                         }
-                                     } catch (Exception e) {
-                                         e.printStackTrace();
-                                     }
-                                 }
+                                    } else {
+                                        ToastUtils.shortToast(HealthcaseApplication.getApplication(), "");
+                                    }
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
 
-                                 @Override
-                                 public void onError(Throwable e) {
-                                     e.printStackTrace();
-                                     ToastUtils.shortToast(HealthcaseApplication.getApplication(), "获取数据失败～");
-                                 }
+                        @Override
+                        public void onError(Throwable e) {
+                            e.printStackTrace();
+                            ToastUtils.shortToast(HealthcaseApplication.getApplication(), "获取数据失败～");
+                        }
 
-                                 @Override
-                                 public void onComplete() {
+                        @Override
+                        public void onComplete() {
 
-                                 }
-                             });
+                        }
+                    });
 
         } catch (Exception e) {
 
@@ -329,69 +346,69 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener,
             destroyHomeDis();
 
             ApiServiceFactory.getStringApiService()
-                             .getHomeDataBak(body)
-                             .subscribeOn(Schedulers.io())
-                             .observeOn(AndroidSchedulers.mainThread())
-                             .subscribe(new Observer<String>() {
-                                 @Override
-                                 public void onSubscribe(Disposable d) {
-                                     homeDis = d;
-                                 }
+                    .getHomeDataBak(body)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<String>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+                            homeDis = d;
+                        }
 
-                                 @Override
-                                 public void onNext(String stringResponse) {
-                                     if (swipeRefreshLayout != null && swipeRefreshLayout.isRefreshing()) {
-                                         swipeRefreshLayout.setRefreshing(false);
-                                     }
-                                     try {
-                                         if (stringResponse != null) {
-                                             String result = ThreeDesUtils.decryptThreeDESECB(stringResponse.toString(),
-                                                     sharedPrefsUtil.getString(Constants.USER_SECRET_KEY, ""));
+                        @Override
+                        public void onNext(String stringResponse) {
+                            if (swipeRefreshLayout != null && swipeRefreshLayout.isRefreshing()) {
+                                swipeRefreshLayout.setRefreshing(false);
+                            }
+                            try {
+                                if (stringResponse != null) {
+                                    String result = ThreeDesUtils.decryptThreeDESECB(stringResponse.toString(),
+                                            sharedPrefsUtil.getString(Constants.USER_SECRET_KEY, ""));
 
-                                             LogUtils.d(TAG, "result=" + result.toString());
+                                    LogUtils.d(TAG, "result=" + result.toString());
 
-                                             Gson gson = new Gson();
-                                             HomeInfo response = gson.fromJson(result, HomeInfo.class);
+                                    Gson gson = new Gson();
+                                    HomeInfo response = gson.fromJson(result, HomeInfo.class);
 
-                                             if (response.isSuccess()) {
-                                                 //  hotServiceAdapter.setHotServiceBeanList(response.getData().getServiceVos());
-                                                 //   hotGoodsAdapter.setHotServiceBeanList(response.getData().getGoodsVos());
-                                                 adapter11.clear();
-                                                 adapter11.addAll(response.getData().getServiceGoodsVos());
-                                                 adapter22.clear();
-                                                 adapter22.addAll(response.getData().getHotGoodsVos());
-                                                 homeMenuAdapter.setHomeMenus(response.getData().getMenuVos());
-                                                 adsVosBeans = response.getData().getAdsVos();
-                                                 if (null != adsVosBeans) {
-                                                     images.clear();
-                                                     for (int i = 0; i < adsVosBeans.size(); i++) {
-                                                         images.add(adsVosBeans.get(i).getPic());
-                                                     }
-                                                     setmBanner(images);
-                                                 }
-                                             } else {
-                                                 ToastUtils.shortToast(HealthcaseApplication.getApplication(), "");
-                                             }
-                                         }
-                                     } catch (Exception e) {
-                                         e.printStackTrace();
-                                     }
-                                 }
+                                    if (response.isSuccess()) {
+                                        //  hotServiceAdapter.setHotServiceBeanList(response.getData().getServiceVos());
+                                        //   hotGoodsAdapter.setHotServiceBeanList(response.getData().getGoodsVos());
+                                        adapter11.clear();
+                                        adapter11.addAll(response.getData().getServiceGoodsVos());
+                                        adapter22.clear();
+                                        adapter22.addAll(response.getData().getHotGoodsVos());
+                                        homeMenuAdapter.setHomeMenus(response.getData().getMenuVos());
+                                        adsVosBeans = response.getData().getAdsVos();
+                                        if (null != adsVosBeans) {
+                                            images.clear();
+                                            for (int i = 0; i < adsVosBeans.size(); i++) {
+                                                images.add(adsVosBeans.get(i).getPic());
+                                            }
+                                            setmBanner(images);
+                                        }
+                                    } else {
+                                        ToastUtils.shortToast(HealthcaseApplication.getApplication(), "");
+                                    }
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
 
-                                 @Override
-                                 public void onError(Throwable e) {
-                                     e.printStackTrace();
-                                     ToastUtils.shortToast(HealthcaseApplication.getApplication(), "获取数据失败～");
-                                     if (null != swipeRefreshLayout && swipeRefreshLayout.isRefreshing()) {
-                                         swipeRefreshLayout.setRefreshing(false);
-                                     }
-                                 }
+                        @Override
+                        public void onError(Throwable e) {
+                            e.printStackTrace();
+                            ToastUtils.shortToast(HealthcaseApplication.getApplication(), "获取数据失败～");
+                            if (null != swipeRefreshLayout && swipeRefreshLayout.isRefreshing()) {
+                                swipeRefreshLayout.setRefreshing(false);
+                            }
+                        }
 
-                                 @Override
-                                 public void onComplete() {
+                        @Override
+                        public void onComplete() {
 
-                                 }
-                             });
+                        }
+                    });
 
         } catch (Exception e) {
 
@@ -403,6 +420,66 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener,
         if (null != homeDis && !homeDis.isDisposed()) {
             homeDis.dispose();
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void Event(GetTokenEvent getTokenEvent) {
+        getToken();
+    }
+
+    private void destroyDis() {
+        if (null != disposable && !disposable.isDisposed()) {
+            disposable.dispose();
+        }
+    }
+
+    private void getToken() {
+        destroyDis();
+        ApiServiceFactory.getStringApiService()
+                .getBaseInfo()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        disposable = d;
+                    }
+
+                    @Override
+                    public void onNext(String stringResponse) {
+                        LogUtils.d(TAG, "stringResponse=" + stringResponse.toString());
+                        try {
+                            String result = ThreeDesUtils.decryptThreeDESECB(stringResponse.toString(),
+                                    AppConfig.commonKey);
+
+
+                            Gson gson = new Gson();
+                            Type type = new TypeToken<Response<BaseInfo>>() {
+                            }.getType();
+                            Response<BaseInfo> response = gson.fromJson(result, type);
+                            LogUtils.d(TAG, "result=" + response.toString());
+                            if (response.getData() != null) {
+                                sharedPrefsUtil.setString(Constants.USER_TOKEN, response.getData().getToken());
+                                sharedPrefsUtil.setString(Constants.USER_SECRET_KEY, response.getData().getSecretKey());
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        //  sharedPrefsUtil.setString(Constants.USER_TOKEN,stringResponse.getToken());
+                        //  sharedPrefsUtil.setString(Constants.USER_SECRET_KEY,stringResponse.getSecretKey());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
     }
 
     @Override
